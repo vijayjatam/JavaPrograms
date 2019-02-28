@@ -1,0 +1,65 @@
+# project language
+language: java
+
+jdk:
+  - oraclejdk8
+
+cache:
+  directories:
+    - $HOME/.m2
+
+# To use more customizable environment running in a virtual machine
+sudo: enabled
+
+# Ubuntu distribution to use as test environment
+dist: trusty
+
+# Travis CI uses the .travis.yml file from the branch containing the git commit that triggers the build.
+# Include branches using a safelist, or exclude them using a blocklist.
+branches:
+  only:
+    - master
+    - release
+    - /^DATA-\d+.*$/
+    - /^epic-DATA-\d+.*$/
+
+# Install any dependencies requires by the project.
+# Note: Travis defaults to `mvn install` if unspecified.
+install:
+  - pip install awscli --upgrade --user
+  - aws --version
+
+# Travis CI clones repositories to a depth of 50 commits, which is only really useful if you are performing git operations, so
+# See https://docs.travis-ci.com/user/customizing-the-build#git-clone-depth
+git:
+  depth: false
+
+# Phase to run something before script phase.
+before_script:
+  # Force the jar version to be the TRAVIS_BUILD_NUMBER, ignoring the version defined in pom.xml
+  - mvn versions:set -DnewVersion="${TRAVIS_BUILD_NUMBER}"
+
+# Main section. This is where build and test command(s) are specified.
+# If tests pass, publish Docker image (note that we do this here because we want a failed Docker image publish to fail the entire build)
+script:
+  - mvn --batch-mode --show-version clean test package
+
+deploy:
+  - provider: script
+    script: bash ci/deploy.sh dev ${TRAVIS_BUILD_NUMBER}
+    skip_cleanup: true
+    on:
+      all_branches: true
+      condition: $TRAVIS_BRANCH =~ ^(DATA-[0-9]+.*)|(epic-DATA-[0-9]+.*)$
+  - provider: script
+    script: bash ci/deploy.sh staging ${TRAVIS_BUILD_NUMBER}
+    skip_cleanup: true
+    on:
+      all_branches: true
+      condition: $TRAVIS_BRANCH == master
+  - provider: script
+    script: bash ci/deploy.sh prod ${TRAVIS_BUILD_NUMBER}
+    skip_cleanup: true
+    on:
+      all_branches: true
+      condition: $TRAVIS_BRANCH == release
