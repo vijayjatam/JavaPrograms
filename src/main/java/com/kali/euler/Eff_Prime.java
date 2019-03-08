@@ -2,9 +2,8 @@ package com.kali.euler;
 
 
 import java.math.BigInteger;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.TreeMap;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author mahan.k.palavelli
@@ -12,6 +11,7 @@ import java.util.TreeMap;
 public class Eff_Prime {
     @SuppressWarnings("static-access")
     public static void main(String[] args) {
+        System.out.println(nthPrime(10001));
         String input = "600851475143"; //935649839983
         //primeOrNot(Integer.parseInt(input));
         bigPrim(new BigInteger(input)); //600851475143
@@ -31,6 +31,7 @@ public class Eff_Prime {
         if (!flage)
             System.out.println("Prime");
     }
+
     private static boolean isPrime(int value, int divir) {
         if (value == 2) {
             return true;
@@ -78,6 +79,7 @@ public class Eff_Prime {
             System.out.println("The given value is prime, so largest prime factor is " + bigInteger);
         }
     }
+
     private static boolean isBigPrime(BigInteger value, BigInteger divir) {
         if (value.compareTo(BigInteger.valueOf(2)) == 0) {
             return true;
@@ -92,7 +94,8 @@ public class Eff_Prime {
             return true;
         }*/
         boolean flag = true;
-        for (; (value.divide(BigInteger.valueOf(2))).compareTo(divir) == 1 || (value.divide(BigInteger.valueOf(2))).compareTo(divir) == 0; ) {
+        for (; (value.divide(BigInteger.valueOf(2))).compareTo(divir) == 1
+                || (value.divide(BigInteger.valueOf(2))).compareTo(divir) == 0; ) {
             if (value.divideAndRemainder(divir)[1].compareTo(BigInteger.ZERO) == 0) {
                 flag = false;
                 break;
@@ -101,4 +104,25 @@ public class Eff_Prime {
         }
         return flag;
     }
+
+    private static int nthPrime(int range) {
+        int nthPrimeValue = 0;
+        int naturalNumber = 2;
+        while (range > 0) {
+            if (isPrime(naturalNumber++, 2)) {
+                range--;
+                nthPrimeValue = naturalNumber - 1;
+            }
+        }
+        return nthPrimeValue;
+    }
+
+    private static BigInteger largestPrime(long range) {
+        List<BigInteger> primesBelowRange = new ArrayList<>();
+
+        return null;
+    }
+   /* private static BigInteger funtionForLargestPrime(){
+
+    }*/
 }

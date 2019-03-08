@@ -1,8 +1,9 @@
 package com.kali.euler;
 
+import com.kali.jug.JugSolve;
+
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -80,10 +81,17 @@ public class SmallestMultiple {
     }
     static int count = 0;
     static BigInteger scm = BigInteger.ZERO;
+    static Integer value = 0;
     public static void main(String[] args) {
         //printing();
         List list = new ArrayList();
-        for(int i =1;i<=1000;i++){
+        for(int i =1;i<=17;i++){
+            list.add(i);
+        }
+        value = (Integer) list.get(count);
+        list.remove(count);
+        System.out.println(lcmOnInt(list));
+        for(int i =1;i<=17;i++){
             BigInteger big = new BigInteger(String.valueOf(i));
             list.add(big);
         }
@@ -91,6 +99,13 @@ public class SmallestMultiple {
         list.remove(0);
         System.out.println(lcm(list));
         check();
+    }
+    public static int lcmOnInt(List<Integer> list){
+        value = (value*list.get(count)) / JugSolve.GCD(value,list.get(count));
+        list.remove(count);
+        if(list.size() == count)
+            return value;
+        return lcmOnInt(list);
     }
     public static BigInteger lcm(List<BigInteger> list) {
         scm = (((BigInteger)list.get(count)).multiply(scm)).divide(gcd((BigInteger) list.get(count),scm));
