@@ -36,6 +36,7 @@ public class Java8Streams {
         //list.stream().distinct().flatMap();
         Map<String, Integer> sourceMap = list.stream().distinct().collect(Collectors.toMap(s->s,s->Collections.frequency(list,s)));
         System.out.println(sourceMap);
+        System.out.println("i am here : "+sourceMap.entrySet().stream().map(x -> x.getValue()).collect(Collectors.toList()));
         sourceMap.entrySet().removeIf(x -> (x.getValue()<=1));
 
         //sourceMap.entrySet().stream().map()

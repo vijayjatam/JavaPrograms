@@ -7,7 +7,7 @@ public class JugSolve {
 	public static int smallJugSize = 0, largeJugSize = 0, setSize = 0;
 	public static void main(String[] args) {
 		//solveWaterJugPuzzle();
-		System.out.println(GCD(9,15));
+		System.out.println(GCD(4,6));
 	}
 	public static  void solveWaterJugPuzzle() {
 		Scanner scan = new Scanner(System.in);
@@ -107,6 +107,6 @@ public class JugSolve {
 	public static int GCD(int number1, int number2) {
 		if(number2 == 0)
 			return number1;
-		return GCD(number2, number1%number2);		
+		return GCD(number2, number1%number2);
 	}
 }

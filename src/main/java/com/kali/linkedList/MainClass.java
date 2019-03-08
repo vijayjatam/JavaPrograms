@@ -6,15 +6,15 @@ import java.util.Scanner;
 
 public class MainClass {
 	public static void main(String[] args) {
-		LinkedList list =new LinkedList();
-		list.addAll(list);
+		/*LinkedList list =new LinkedList();
+		list.addAll(list);*/
 	//	list();
-//		setValueInDynamic();
-		//showRandom();
-		list();
+		//setValueInDynamic();
+		showRandom();
+		//list();
 	}
 	public static void list(){
-		OwnLinkedList linkedList = new OwnLinkedList();
+		LegacyOwnLinkedList linkedList = new LegacyOwnLinkedList();
 		for(int i =10;i>=1;i--){
 			linkedList.addNodeAtFirst(i);
 		}
@@ -22,14 +22,15 @@ public class MainClass {
 		for(int i =31;i<=40;i++){
 			linkedList.addNodeAtEnd(i);
 		}
-		OwnNode kthPlaceNode = linkedList.searchNodeFromEnd(23);
+		System.out.println(linkedList);
+		OwnNode kthPlaceNode = linkedList.searchNodeFromEnd(0);
 		System.out.println("Value : "+kthPlaceNode.VALUE+" : "+kthPlaceNode.hashCode());
-	//	System.out.println(linkedList);
+		//System.out.println(linkedList);
 		OwnNode listOfNodes = linkedList.revers();
-		while(listOfNodes!=null){
+		/*while(listOfNodes!=null){
 			System.out.println(listOfNodes.VALUE+" : "+listOfNodes.hashCode());
 			listOfNodes = listOfNodes.NEXT_NODE;
-		}
+		}*/
 		//System.out.println(linkedList.size());
 		
 		
@@ -41,7 +42,7 @@ public class MainClass {
 		System.out.println(linkedList.size());*/
 		
 //		System.out.println(linkedList.middleNode().VALUE+" : "+linkedList.middleNode().hashCode());
-		OwnLinkedList linkedList_1 = new OwnLinkedList();
+		LegacyOwnLinkedList linkedList_1 = new LegacyOwnLinkedList();
 		for(int i =20;i>=11;i--){
 			linkedList_1.addNodeAtFirst(i);
 		}
@@ -80,9 +81,16 @@ public class MainClass {
 		System.out.println(linkedList.middleNodeWithEff().VALUE);
 	}
 	public static void showRandom(){
+		OwnLinkedList linkedList = new OwnLinkedList();
 		Random r = new Random();
 		for(int i =1;i<=11;i++){
-			System.out.print(r.nextInt(50)+1+" , ");
+			int value = r.nextInt(50)+1;
+			linkedList.addNodeAtEnd(value);
+			System.out.print(value+" , ");
 		}
+
+		System.out.println();
+		System.out.println(linkedList.middleNodeWithEff().VALUE);
+		System.out.println(linkedList.size());
 	}
 }

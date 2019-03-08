@@ -1,7 +1,0 @@
-KALI=:31^1
-JAVA=:28^1
-INPUT=:19^2
-manoj=:45^1
-PEN=:19^2
-MAHAN=:6^2
-IPHONE=:22^2
