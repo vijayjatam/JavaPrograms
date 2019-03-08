@@ -1,0 +1,2 @@
+kali=:Veg::Veg1^1.0;Veg2^10.0;#Fruits::Fruit1^7.0;#DryItems::Dairy^22.0;#Others::Paper^32.0;#
+nikita=:Veg::nikku^67.0;#
