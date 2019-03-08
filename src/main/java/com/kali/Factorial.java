@@ -7,10 +7,8 @@ import java.util.Scanner;
 public class Factorial {
 	static BigInteger finalValue = new BigInteger("1");
 	static int finalVal = 1;
-	static Object obj =new Object();
 
 	public static void main(String[] args) {
-//		obj.notify();
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Enter Number for finding factorial for that\n");
 		BigInteger sourceInteger = scan.nextBigInteger();
