@@ -4,6 +4,7 @@ import com.kali.Factorial;
 
 import java.math.BigInteger;
 
+
 public class A_Plus_B {
     static BigInteger finalValue = BigInteger.ZERO;
     static long k = 0;
@@ -13,6 +14,16 @@ public class A_Plus_B {
         //System.out.println(ncr(10, 2));
     }
 
+    /**
+     * Below method can do.....!
+     *            n
+     *  (a+b)^n = Σ  nCk a^(n-k) b^k
+     *            k=0
+     *
+     *             n!
+     *   nCk = ---------
+     *         (n-k)! k!
+     */
     public BigInteger a_b_power(long a, long b, long n) {
         for (long k =0;k<=n;k++){
             BigInteger ncr = ncr(n,k);
@@ -21,13 +32,21 @@ public class A_Plus_B {
             finalValue = finalValue.add(ncr.multiply(aPower).multiply(bPower));
         }
         return finalValue;
+
     }
 
+    /*
+        base^power, Ex: 2^4 = 16
+     */
     public static BigInteger power(long base, long power) {
         BigInteger bigInteger = BigInteger.valueOf((long) Math.pow(base, power));
         return bigInteger;
     }
 
+    /**             n!
+     *   nCk = ---------
+     *         (n-k)! k!
+     */
     public static BigInteger ncr(long n, long r) {
         //double finalNCR = 0.d;
         BigInteger bigInteger = BigInteger.ZERO;
